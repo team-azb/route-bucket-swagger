@@ -405,6 +405,20 @@ components:
         - distance_from_start
       x-tags:
         - route
+    BoundingBox:
+      title: BoundingBox
+      type: object
+      description: |-
+        Routeを囲むバウンディングボックス
+        フロントでの地図表示に用いる
+      properties:
+        min_coord:
+          $ref: '#/components/schemas/Coordinate'
+        max_coord:
+          $ref: '#/components/schemas/Coordinate'
+      required:
+        - min_coord
+        - max_coord
     Segment:
       type: object
       description: waypointに挟まれた一つの区間に対し、補間を行った上で標高を付与した配列
@@ -483,6 +497,8 @@ components:
           description: ルートの総距離
           minimum: 0
           format: double
+        bounding_box:
+          $ref: '#/components/schemas/BoundingBox'
       required:
         - id
         - name
@@ -490,6 +506,7 @@ components:
         - segments
         - elevation_gain
         - total_distance
+        - bounding_box
     Error:
       type: object
       description: Error
