@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.1.0
 info:
   title: RouteBucketBackend
   description: RouteBucketBackend
@@ -110,9 +110,9 @@ paths:
         required: true
         schema:
           type: string
-  '/routes/{id}/gpx/':
+  '/routes/gpx/{id}':
     parameters:
-      - $ref: ./components/parameters/route_id.yml
+      - $ref: '#/components/parameters/route_id'
     get:
       summary: RouteのGPX出力
       tags:
@@ -208,6 +208,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    parameters:
+      - $ref: '#/components/parameters/route_id'
+      - $ref: '#/components/parameters/pos'
   '/routes/{id}/remove/{pos}':
     patch:
       operationId: routesRemove
