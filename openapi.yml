@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.0.3
 info:
   title: RouteBucketBackend
   description: RouteBucketBackend
@@ -470,7 +470,9 @@ components:
         - name
     Route:
       type: object
-      description: Polyline付きのRoute
+      description: |-
+        `Polyline`付きの`Route`
+        `Route`が空の場合のみ`BoundingBox`を持たない
       x-tags:
         - route
       properties:
@@ -509,7 +511,6 @@ components:
         - segments
         - elevation_gain
         - total_distance
-        - bounding_box
     Error:
       type: object
       description: Error
