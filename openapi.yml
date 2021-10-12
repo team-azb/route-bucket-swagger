@@ -28,6 +28,13 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/RouteInfo'
+                    example:
+                      - id: dygyGq2FOAm
+                        name: 富士山直行
+                      - id: kB61aMhc4I_
+                        name: "sample2: 皇居ラン"
+                      - id: oOG5rYWu1YN
+                        name: sample1
                 required:
                   - routes
       description: 全`Route`の`RouteInfo`を一覧で返す
@@ -81,6 +88,125 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Route'
+              example:
+                id: kB61aMhc4I_
+                name: mock_sample
+                waypoints:
+                  - latitude: 35.68136
+                    longitude: 139.75876
+                  - latitude: 35.69055
+                    longitude: 139.7568
+                segments:
+                  - points:
+                      - latitude: 35.68136
+                        longitude: 139.75876
+                        elevation: 7
+                        distance_from_start: 0.0
+                      - latitude: 35.68244
+                        longitude: 139.75945
+                        elevation: 0
+                        distance_from_start: 135.29845221622904
+                      - latitude: 35.68275
+                        longitude: 139.75966
+                        elevation: -12
+                        distance_from_start: 174.64283262126588
+                      - latitude: 35.68314
+                        longitude: 139.75991
+                        elevation: -5
+                        distance_from_start: 223.53520415689425
+                      - latitude: 35.6832
+                        longitude: 139.75986
+                        elevation: -5
+                        distance_from_start: 235.0378642930681
+                      - latitude: 35.68452
+                        longitude: 139.76027
+                        elevation: 1
+                        distance_from_start: 387.91297063867233
+                      - latitude: 35.68481
+                        longitude: 139.7604
+                        elevation: 0
+                        distance_from_start: 422.24716811243513
+                      - latitude: 35.68496
+                        longitude: 139.7605
+                        elevation: 5
+                        distance_from_start: 441.2240245995616
+                      - latitude: 35.68523
+                        longitude: 139.76072
+                        elevation: 5
+                        distance_from_start: 477.23739202415607
+                      - latitude: 35.68532
+                        longitude: 139.76082
+                        elevation: 5
+                        distance_from_start: 490.9080235469514
+                      - latitude: 35.6856
+                        longitude: 139.76095
+                        elevation: 6
+                        distance_from_start: 524.214475013159
+                      - latitude: 35.68569
+                        longitude: 139.76099
+                        elevation: 6
+                        distance_from_start: 534.8608965088586
+                      - latitude: 35.68576
+                        longitude: 139.76102
+                        elevation: 6
+                        distance_from_start: 543.1174461489453
+                      - latitude: 35.68584
+                        longitude: 139.76106
+                        elevation: 6
+                        distance_from_start: 552.7186395786945
+                      - latitude: 35.68713
+                        longitude: 139.7614
+                        elevation: 12
+                        distance_from_start: 699.460287920067
+                      - latitude: 35.68731
+                        longitude: 139.76143
+                        elevation: 12
+                        distance_from_start: 719.8356893322001
+                      - latitude: 35.68833
+                        longitude: 139.76102
+                        elevation: -4
+                        distance_from_start: 839.146113765254
+                      - latitude: 35.6892
+                        longitude: 139.76076
+                        elevation: 1
+                        distance_from_start: 938.7117673516411
+                      - latitude: 35.68939
+                        longitude: 139.76053
+                        elevation: 1
+                        distance_from_start: 968.5363238601359
+                      - latitude: 35.68996
+                        longitude: 139.75983
+                        elevation: 20
+                        distance_from_start: 1058.0709003556071
+                      - latitude: 35.68999
+                        longitude: 139.75974
+                        elevation: 20
+                        distance_from_start: 1066.9634531124427
+                      - latitude: 35.69021
+                        longitude: 139.75869
+                        elevation: 14
+                        distance_from_start: 1164.899981198707
+                      - latitude: 35.69028
+                        longitude: 139.75821
+                        elevation: 14
+                        distance_from_start: 1208.9694613796746
+                      - latitude: 35.69054
+                        longitude: 139.75667
+                        elevation: 16
+                        distance_from_start: 1358.3763482720174
+                      - latitude: 35.69055
+                        longitude: 139.7568
+                        elevation: 16
+                        distance_from_start: 1370.582718193045
+                elevation_gain: 302
+                total_distance: 6188.845447778645
+                bounding_box:
+                  min_coord:
+                    longitude: 139.7568
+                    latitude: 35.68136
+                  max_coord:
+                    longitude: 139.76143
+                    latitude: 35.69055
         '404':
           description: |
             対応するRouteが存在しない場合
@@ -450,7 +576,7 @@ components:
       x-tags:
         - route
       x-examples: {}
-      example: 2baY2o3zfGP
+      # example: 2baY2o3zfGP
     RouteInfo:
       type: object
       description: Route
