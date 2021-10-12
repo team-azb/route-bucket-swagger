@@ -576,7 +576,7 @@ components:
       x-tags:
         - route
       x-examples: {}
-      # example: 2baY2o3zfGP
+      example: 2baY2o3zfGP
     RouteInfo:
       type: object
       description: Route
