@@ -431,12 +431,15 @@ components:
       x-tags:
         - route
     DrawingMode:
-      title: DrawingMode
       type: string
+      title: DrawingMode
       description: |-
         `Segment`を補完するときのモード
         * `follow_road`: 道に沿う
         * `freehand`: フリーハンド
+      enum:
+        - follow_road
+        - freehand
     RouteId:
       type: string
       title: RouteId
