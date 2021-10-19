@@ -29,12 +29,8 @@ paths:
                     items:
                       $ref: '#/components/schemas/RouteInfo'
                     example:
-                      - id: dygyGq2FOAm
-                        name: 富士山直行
                       - id: kB61aMhc4I_
-                        name: "sample2: 皇居ラン"
-                      - id: oOG5rYWu1YN
-                        name: sample1
+                        name: "sample: 皇居ラン１区画"
                 required:
                   - routes
       description: 全`Route`の`RouteInfo`を一覧で返す
