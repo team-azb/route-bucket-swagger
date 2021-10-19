@@ -30,7 +30,7 @@ paths:
                       $ref: '#/components/schemas/RouteInfo'
                     example:
                       - id: kB61aMhc4I_
-                        name: "sample: 皇居ラン１区画"
+                        name: "mock_sample"
                 required:
                   - routes
       description: 全`Route`の`RouteInfo`を一覧で返す
