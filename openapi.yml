@@ -232,7 +232,7 @@ paths:
         required: true
         schema:
           type: string
-  '/routes/gpx/{id}':
+  '/routes/{id}/gpx/':
     parameters:
       - $ref: '#/components/parameters/route_id'
     get:
