@@ -30,7 +30,7 @@ paths:
                       $ref: '#/components/schemas/RouteInfo'
                     example:
                       - id: kB61aMhc4I_
-                        name: "mock_sample"
+                        name: mock_sample
                 required:
                   - routes
       description: 全`Route`の`RouteInfo`を一覧で返す
@@ -97,7 +97,7 @@ paths:
                       - latitude: 35.68136
                         longitude: 139.75876
                         elevation: 7
-                        distance_from_start: 0.0
+                        distance_from_start: 0
                       - latitude: 35.68244
                         longitude: 139.75945
                         elevation: 0
@@ -463,6 +463,82 @@ paths:
                 $ref: '#/components/schemas/Error'
     parameters:
       - $ref: '#/components/parameters/route_id'
+  /users/:
+    post:
+      summary: Userの作成
+      operationId: post-users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    $ref: '#/components/schemas/UserId'
+                required:
+                  - id
+        '400':
+          description: |-
+            バリデーションに引っかかった場合
+            * 名前の長さ
+            * id, email, passwordの形式
+            など
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - user
+      description: 与えられたbodyから`User`を作成し、そのidを返す
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  $ref: '#/components/schemas/UserId'
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 50
+                  description: Userの表示名
+                email:
+                  type: string
+                  format: email
+                  description: Userのemail
+                icon_url:
+                  type: string
+                  format: uri
+                  description: アイコン画像のURL
+                birth_date:
+                  type: string
+                  format: date
+                  description: 誕生日
+                gender:
+                  type: string
+                  enum:
+                    - male
+                    - female
+                  description: 性別
+                password:
+                  type: string
+                  description: アカウントのパスワード
+                  minLength: 6
+                password_confirmation:
+                  type: string
+                  description: パスワード確認用
+                  minLength: 6
+              required:
+                - id
+                - name
+                - email
+                - password
+                - password_confirmation
+            examples: {}
+        description: Userの情報
 components:
   schemas:
     Coordinate:
@@ -631,6 +707,11 @@ components:
         - segments
         - elevation_gain
         - total_distance
+    UserId:
+      type: string
+      title: UserId
+      description: '`User`のID'
+      pattern: '^[a-zA-Z0-9]([a-zA-Z0-9]?|[\-]?([a-zA-Z0-9])){0,38}$'
     Error:
       type: object
       description: Error
