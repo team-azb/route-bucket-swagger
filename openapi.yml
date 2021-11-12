@@ -513,7 +513,7 @@ paths:
                   type: string
                   format: uri
                   description: アイコン画像のURL
-                birth_date:
+                birthdate:
                   type: string
                   format: date
                   description: 誕生日
