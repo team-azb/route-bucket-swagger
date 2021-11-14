@@ -516,7 +516,7 @@ paths:
                 birthdate:
                   type: string
                   format: date
-                  description: 誕生日
+                  description: 生年月日（未来の日付は指定不可）
                 gender:
                   type: string
                   enum:
