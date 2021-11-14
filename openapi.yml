@@ -509,20 +509,20 @@ paths:
                   type: string
                   format: email
                   description: Userのemail
-                icon_url:
-                  type: string
-                  format: uri
-                  description: アイコン画像のURL
-                birthdate:
-                  type: string
-                  format: date
-                  description: 生年月日（未来の日付は指定不可）
                 gender:
                   type: string
                   enum:
                     - male
                     - female
                   description: 性別
+                birthdate:
+                  type: string
+                  format: date
+                  description: 生年月日（未来の日付は指定不可）
+                icon_url:
+                  type: string
+                  format: uri
+                  description: アイコン画像のURL
                 password:
                   type: string
                   description: アカウントのパスワード
