@@ -9,6 +9,8 @@ servers:
 tags:
   - name: route
     description: ルートに関するエンドポイントたち
+  - name: user
+    description: ユーザーに関するエンドポイントたち
 paths:
   /routes/:
     get:
