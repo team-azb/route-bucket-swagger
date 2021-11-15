@@ -470,8 +470,8 @@ paths:
       summary: Userの作成
       operationId: post-users
       responses:
-        '200':
-          description: OK
+        '201':
+          description: Created
           content:
             application/json:
               schema:
