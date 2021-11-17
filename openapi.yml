@@ -582,6 +582,8 @@ paths:
       description: |-
         `id`に一致するアカウントを削除する
         Firebaseでのアカウント削除も行う
+      tags:
+        - user
     patch:
       summary: User情報の更新
       operationId: patch-user-id
@@ -625,6 +627,8 @@ paths:
         description: jsonで指定されたkeyについてのみ、更新を行う
       security:
         - userBearerAuth: []
+      tags:
+        - user
 components:
   schemas:
     Coordinate:
