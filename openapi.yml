@@ -33,6 +33,7 @@ paths:
                     example:
                       - id: kB61aMhc4I_
                         name: mock_sample
+                        owner_id: user0
                 required:
                   - routes
       description: 全`Route`の`RouteInfo`を一覧で返す
@@ -71,6 +72,35 @@ paths:
                     $ref: '#/components/schemas/RouteId'
                 required:
                   - id
+  /routes/search:
+    get:
+      summary: 公開ルートの検索
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  routes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RouteInfo'
+                required:
+                  - routes
+      operationId: get-routes-search
+      description: ''
+      parameters:
+        - schema:
+            type: string
+            minLength: 11
+            maxLength: 11
+          in: query
+          name: owner_id
+          description: '`Route`の所有者を指定して検索'
+    parameters: []
   '/routes/{id}':
     get:
       operationId: routesGet
@@ -89,6 +119,7 @@ paths:
               example:
                 id: kB61aMhc4I_
                 name: mock_sample
+                owner_id: user0
                 waypoints:
                   - latitude: 35.68136
                     longitude: 139.75876
@@ -753,9 +784,12 @@ components:
           type: string
           maxLength: 50
           description: ルートの名前
+        owner_id:
+          $ref: '#/components/schemas/UserId'
       required:
         - id
         - name
+        - owner_id
     Route:
       type: object
       description: |-
@@ -770,6 +804,8 @@ components:
           type: string
           maxLength: 50
           description: ルートの名前
+        owner_id:
+          $ref: '#/components/schemas/UserId'
         waypoints:
           type: array
           description: ユーザーの入力した点の配列
@@ -795,6 +831,7 @@ components:
       required:
         - id
         - name
+        - owner_id
         - waypoints
         - segments
         - elevation_gain
