@@ -572,7 +572,6 @@ paths:
                 $ref: '#/components/schemas/Error'
         '404':
           description: Not Found
-          headers: {}
           content:
             application/json:
               schema:
@@ -582,6 +581,7 @@ paths:
       description: |-
         `id`に一致するアカウントを削除する
         Firebaseでのアカウント削除も行う
+        認証が必要
       tags:
         - user
     patch:
@@ -606,7 +606,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-      description: ''
+      description: |-
+        email, password以外のUser情報を編集するためのエンドポイント
+        認証が必要
       requestBody:
         content:
           application/json:
