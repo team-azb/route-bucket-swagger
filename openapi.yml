@@ -75,7 +75,8 @@ paths:
   /routes/search:
     get:
       summary: 公開ルートの検索
-      tags: []
+      tags:
+        - route
       responses:
         '200':
           description: OK
