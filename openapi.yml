@@ -493,7 +493,9 @@ paths:
                 $ref: '#/components/schemas/Error'
       tags:
         - user
-      description: 与えられたbodyから`User`を作成し、そのidを返す
+      description: |-
+        与えられたbodyから`User`を作成し、そのidを返す
+        Firebaseに問い合わせてアカウント作成も行う
       requestBody:
         content:
           application/json:
@@ -512,21 +514,11 @@ paths:
                   format: email
                   description: Userのemail
                 gender:
-                  type: string
-                  enum:
-                    - male
-                    - female
-                    - others
-                  description: 性別
-                  default: others
+                  $ref: '#/components/schemas/Gender'
                 birthdate:
-                  type: string
-                  format: date
-                  description: 生年月日（未来の日付は指定不可）
+                  $ref: '#/components/schemas/Birthdate'
                 icon_url:
-                  type: string
-                  format: uri
-                  description: アイコン画像のURL
+                  $ref: '#/components/schemas/IconUrl'
                 password:
                   type: string
                   description: アカウントのパスワード
@@ -543,6 +535,102 @@ paths:
                 - password_confirmation
             examples: {}
         description: Userの情報
+  '/users/{id}':
+    parameters:
+      - $ref: '#/components/parameters/user_id'
+    get:
+      summary: Userの情報の取得
+      tags:
+        - user
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: get-user-id
+      description: 指定したUserの情報を取得する
+      parameters: []
+    delete:
+      summary: Userの削除
+      operationId: delete-user-id
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - userBearerAuth: []
+      description: |-
+        `id`に一致するアカウントを削除する
+        Firebaseでのアカウント削除も行う
+        認証が必要
+      tags:
+        - user
+    patch:
+      summary: User情報の更新
+      operationId: patch-user-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: 各フィールドのバリデーションに引っかかった場合
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      description: |-
+        email, password以外のUser情報を編集するためのエンドポイント
+        認証が必要
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Userの表示名
+                  minLength: 1
+                  maxLength: 50
+                gender:
+                  $ref: '#/components/schemas/Gender'
+                birthdate:
+                  $ref: '#/components/schemas/Birthdate'
+                icon_url:
+                  $ref: '#/components/schemas/IconUrl'
+        description: jsonで指定されたkeyについてのみ、更新を行う
+      security:
+        - userBearerAuth: []
+      tags:
+        - user
 components:
   schemas:
     Coordinate:
@@ -711,11 +799,61 @@ components:
         - segments
         - elevation_gain
         - total_distance
+    User:
+      title: User
+      type: object
+      x-tags:
+        - user
+      properties:
+        id:
+          $ref: '#/components/schemas/UserId'
+        name:
+          type: string
+          description: Userの名前
+          minLength: 1
+          maxLength: 50
+        gender:
+          $ref: '#/components/schemas/Gender'
+        birthdate:
+          $ref: '#/components/schemas/Birthdate'
+        icon_url:
+          $ref: '#/components/schemas/IconUrl'
+      required:
+        - id
+        - name
+        - gender
     UserId:
       type: string
       title: UserId
       description: '`User`のID'
       pattern: '^[a-zA-Z0-9]([a-zA-Z0-9]?|[\-]?([a-zA-Z0-9])){0,38}$'
+      x-tags:
+        - user
+    Gender:
+      type: string
+      title: Gender
+      description: 性別
+      enum:
+        - male
+        - female
+        - others
+      default: others
+      x-tags:
+        - user
+    Birthdate:
+      type: string
+      title: Birthdate
+      format: date
+      description: 生年月日（未来の日付は指定不可）
+      x-tags:
+        - user
+    IconUrl:
+      type: string
+      title: IconUrl
+      description: アイコン画像のURL
+      format: uri
+      x-tags:
+        - user
     Error:
       type: object
       description: Error
@@ -744,6 +882,14 @@ components:
         maxLength: 11
         pattern: '^[A-Za-z0-9_-]+'
       description: ルートのID
+    user_id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: '^[a-zA-Z0-9]([a-zA-Z0-9]?|[\-]?([a-zA-Z0-9])){0,38}$'
+      description: '`User`のID'
   responses:
     RouteEditResponse:
       description: '`Route`編集系のエンドポイントで返すレスポンス'
@@ -793,3 +939,8 @@ components:
               - coord
               - mode
       description: addやmoveのように、新たな座標を提供するリクエスト
+  securitySchemes:
+    userBearerAuth:
+      type: http
+      scheme: bearer
+      description: Userの認証用
