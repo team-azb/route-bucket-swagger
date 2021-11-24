@@ -98,8 +98,8 @@ paths:
       parameters:
         - schema:
             type: string
-            minLength: 11
-            maxLength: 11
+            minLength: 1
+            maxLength: 40
           in: query
           name: owner_id
           description: '`Route`の所有者を指定して検索'
