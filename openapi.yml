@@ -72,6 +72,8 @@ paths:
                     $ref: '#/components/schemas/RouteId'
                 required:
                   - id
+      security:
+        - userBearerAuth: []
   /routes/search:
     get:
       summary: 公開ルートの検索
@@ -261,6 +263,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+        - userBearerAuth: []
     parameters:
       - in: path
         name: id
@@ -326,6 +330,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+        - userBearerAuth: []
     parameters:
       - $ref: '#/components/parameters/route_id'
   '/routes/{id}/add/{pos}':
@@ -355,6 +361,8 @@ paths:
                 $ref: '#/components/schemas/Error'
       requestBody:
         $ref: '#/components/requestBodies/RouteEditWithNewPointRequest'
+      security:
+        - userBearerAuth: []
     parameters:
       - $ref: '#/components/parameters/route_id'
       - $ref: '#/components/parameters/pos'
@@ -393,6 +401,8 @@ paths:
                   $ref: '#/components/schemas/DrawingMode'
               required:
                 - mode
+      security:
+        - userBearerAuth: []
     parameters:
       - $ref: '#/components/parameters/route_id'
       - $ref: '#/components/parameters/pos'
@@ -422,6 +432,8 @@ paths:
                 $ref: '#/components/schemas/Error'
       requestBody:
         $ref: '#/components/requestBodies/RouteEditWithNewPointRequest'
+      security:
+        - userBearerAuth: []
     parameters:
       - $ref: '#/components/parameters/route_id'
       - $ref: '#/components/parameters/pos'
@@ -443,6 +455,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+        - userBearerAuth: []
     parameters:
       - $ref: '#/components/parameters/route_id'
   '/routes/{id}/redo/':
@@ -470,6 +484,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+        - userBearerAuth: []
     parameters:
       - $ref: '#/components/parameters/route_id'
   '/routes/{id}/undo/':
@@ -497,6 +513,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+        - userBearerAuth: []
     parameters:
       - $ref: '#/components/parameters/route_id'
   /users/:
