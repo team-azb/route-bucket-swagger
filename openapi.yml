@@ -398,6 +398,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+        '401':
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+        '403':
+          $ref: '#/components/responses/AuthorizationErrorResponse'
         '404':
           description: |
             対応するRouteが存在しない場合
