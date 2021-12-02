@@ -72,6 +72,10 @@ paths:
                     $ref: '#/components/schemas/RouteId'
                 required:
                   - id
+        '401':
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+      security:
+        - userBearerAuth: []
   /routes/search:
     get:
       summary: 公開ルートの検索
@@ -254,6 +258,10 @@ paths:
       responses:
         '200':
           description: ok
+        '401':
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+        '403':
+          $ref: '#/components/responses/AuthorizationErrorResponse'
         '404':
           description: |
             対応するRouteが存在しない場合
@@ -261,6 +269,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+        - userBearerAuth: []
     parameters:
       - in: path
         name: id
@@ -319,6 +329,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RouteInfo'
+        '401':
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+        '403':
+          $ref: '#/components/responses/AuthorizationErrorResponse'
         '404':
           description: |
             対応するRouteが存在しない場合
@@ -326,6 +340,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+        - userBearerAuth: []
     parameters:
       - $ref: '#/components/parameters/route_id'
   '/routes/{id}/add/{pos}':
@@ -346,6 +362,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+        '401':
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+        '403':
+          $ref: '#/components/responses/AuthorizationErrorResponse'
         '404':
           description: |
             対応するRouteが存在しない場合
@@ -355,6 +375,8 @@ paths:
                 $ref: '#/components/schemas/Error'
       requestBody:
         $ref: '#/components/requestBodies/RouteEditWithNewPointRequest'
+      security:
+        - userBearerAuth: []
     parameters:
       - $ref: '#/components/parameters/route_id'
       - $ref: '#/components/parameters/pos'
@@ -376,6 +398,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+        '401':
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+        '403':
+          $ref: '#/components/responses/AuthorizationErrorResponse'
         '404':
           description: |
             対応するRouteが存在しない場合
@@ -393,6 +419,8 @@ paths:
                   $ref: '#/components/schemas/DrawingMode'
               required:
                 - mode
+      security:
+        - userBearerAuth: []
     parameters:
       - $ref: '#/components/parameters/route_id'
       - $ref: '#/components/parameters/pos'
@@ -413,6 +441,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+        '401':
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+        '403':
+          $ref: '#/components/responses/AuthorizationErrorResponse'
         '404':
           description: |
             対応するRouteが存在しない場合
@@ -422,6 +454,8 @@ paths:
                 $ref: '#/components/schemas/Error'
       requestBody:
         $ref: '#/components/requestBodies/RouteEditWithNewPointRequest'
+      security:
+        - userBearerAuth: []
     parameters:
       - $ref: '#/components/parameters/route_id'
       - $ref: '#/components/parameters/pos'
@@ -436,6 +470,10 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/RouteEditResponse'
+        '401':
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+        '403':
+          $ref: '#/components/responses/AuthorizationErrorResponse'
         '404':
           description: |
             対応するRouteが存在しない場合
@@ -443,6 +481,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+        - userBearerAuth: []
     parameters:
       - $ref: '#/components/parameters/route_id'
   '/routes/{id}/redo/':
@@ -463,6 +503,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+        '401':
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+        '403':
+          $ref: '#/components/responses/AuthorizationErrorResponse'
         '404':
           description: |
             対応するRouteが存在しない場合
@@ -470,6 +514,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+        - userBearerAuth: []
     parameters:
       - $ref: '#/components/parameters/route_id'
   '/routes/{id}/undo/':
@@ -490,6 +536,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+        '401':
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+        '403':
+          $ref: '#/components/responses/AuthorizationErrorResponse'
         '404':
           description: |
             対応するRouteが存在しない場合
@@ -497,6 +547,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+        - userBearerAuth: []
     parameters:
       - $ref: '#/components/parameters/route_id'
   /users/:
@@ -583,12 +635,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
       operationId: get-user-id
       description: 指定したUserの情報を取得する
       parameters: []
@@ -599,11 +645,9 @@ paths:
         '200':
           description: OK
         '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+        '403':
+          $ref: '#/components/responses/AuthorizationErrorResponse'
         '404':
           description: Not Found
           content:
@@ -635,11 +679,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
         '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+        '403':
+          $ref: '#/components/responses/AuthorizationErrorResponse'
       description: |-
         email, password以外のUser情報を編集するためのエンドポイント
         認証が必要
@@ -963,6 +1005,25 @@ components:
               - segments
               - elevation_gain
               - total_distance
+    AuthenticationErrorResponse:
+      description: |-
+        認証が必要なのに認証していない場合のエラー
+
+        認証(401)と認可(403)の違い: https://qiita.com/zawawahoge/items/58021f9c0dde1f99b611
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    AuthorizationErrorResponse:
+      description: |-
+        権限などが足りず、認可に失敗した場合のエラー
+        例えば、別のユーザーの非公開Routeにアクセスしようとした場合はこっち
+
+        認証(401)と認可(403)の違い: https://qiita.com/zawawahoge/items/58021f9c0dde1f99b611
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   examples: {}
   requestBodies:
     RouteEditWithNewPointRequest:
