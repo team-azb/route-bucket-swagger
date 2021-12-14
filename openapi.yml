@@ -572,6 +572,7 @@ paths:
             バリデーションに引っかかった場合
             * 名前の長さ
             * id, email, passwordの形式
+            * id, emailがすでに使われている
             など
           content:
             application/json:
