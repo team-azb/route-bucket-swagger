@@ -610,16 +610,11 @@ paths:
                   type: string
                   description: アカウントのパスワード
                   minLength: 6
-                password_confirmation:
-                  type: string
-                  description: パスワード確認用
-                  minLength: 6
               required:
                 - id
                 - name
                 - email
                 - password
-                - password_confirmation
             examples: {}
         description: Userの情報
   '/users/{id}':
