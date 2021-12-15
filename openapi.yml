@@ -703,6 +703,67 @@ paths:
         - userBearerAuth: []
       tags:
         - user
+  /users/validate/:
+    post:
+      summary: User入力の検証
+      operationId: post-users-validate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  $ref: '#/components/schemas/UserId'
+                name:
+                  type: string
+                  description: Userの表示名
+                email:
+                  type: string
+                  description: Userのemail
+                gender:
+                  $ref: '#/components/schemas/Gender'
+                birthdate:
+                  $ref: '#/components/schemas/Birthdate'
+                icon_url:
+                  $ref: '#/components/schemas/IconUrl'
+                password:
+                  type: string
+                  description: |-
+                    アカウントのパスワード
+                    `password_confirmation`がある場合は、required
+            examples: {}
+        description: |-
+          検証したいUser情報のフィールド
+          一部のフィールドのみを指定することで、部分的な検証が可能
+      description: |-
+        フォームの各フィールドについて、エラーを列挙する
+        全てのフィールドを送信する必要はない
+      responses:
+        '200':
+          description: |-
+            OK
+            各フィールドで、validationのエラーがあった場合のみ、それぞれのフィールドにエラーコードが入る
+            エラーが全くない場合は、空のオブジェクトが返される
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    $ref: '#/components/schemas/ValidationErrorCode'
+                  name:
+                    $ref: '#/components/schemas/ValidationErrorCode'
+                  email:
+                    $ref: '#/components/schemas/ValidationErrorCode'
+                  gender:
+                    $ref: '#/components/schemas/ValidationErrorCode'
+                  birthdate:
+                    $ref: '#/components/schemas/ValidationErrorCode'
+                  icon_url:
+                    $ref: '#/components/schemas/ValidationErrorCode'
+                  password:
+                    $ref: '#/components/schemas/ValidationErrorCode'
 components:
   schemas:
     Coordinate:
@@ -942,6 +1003,15 @@ components:
           type: string
           description: エラー内容
       title: ''
+    ValidationErrorCode:
+      type: string
+      title: ValidationErrorCode
+      description: |-
+        ユーザのフォーム入力に対する、検証結果のエラーコード
+        enumとなっている
+      enum:
+        - INVALID_FORMAT
+        - ALREADY_EXISTS
   parameters:
     pos:
       name: pos
