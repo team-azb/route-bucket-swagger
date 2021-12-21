@@ -98,7 +98,7 @@ paths:
       operationId: get-routes-search
       description: |-
         公開ルートの検索を行う。
-        現状は`route_id`の昇順で返ってくる（いずれ作成日時などのフィールドを追加して、それに応じて並べたい）
+        現状は`updated_at`の昇順で返ってくる（いずれ作成日時などのフィールドを追加して、それに応じて並べたい）
       parameters:
         - schema:
             type: string
