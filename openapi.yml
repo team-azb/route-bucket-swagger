@@ -107,6 +107,20 @@ paths:
           in: query
           name: owner_id
           description: '`Route`の所有者を指定して検索'
+        - schema:
+            type: integer
+            minimum: 1
+            default: 1
+          in: query
+          name: page
+          description: 取得するページ番号
+        - schema:
+            type: integer
+            default: 20
+            minimum: 1
+          in: query
+          name: page_size
+          description: ページあたりの検索結果件数
     parameters: []
   '/routes/{id}':
     get:
