@@ -120,11 +120,10 @@ paths:
           description: 取得するページ位置（0-indexed）
         - schema:
             type: integer
-            default: 20
             minimum: 1
           in: query
           name: page_size
-          description: ページあたりの検索結果件数
+          description: ページあたりの検索結果件数 （指定されなかった場合、全件取得する）
     parameters: []
   '/routes/{id}':
     get:
