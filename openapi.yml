@@ -93,8 +93,12 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/RouteInfo'
+                  result_num:
+                    type: integer
+                    description: このページを含む検索結果の総数
                 required:
                   - routes
+                  - result_num
       operationId: get-routes-search
       description: |-
         公開ルートの検索を行う。
