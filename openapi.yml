@@ -113,11 +113,11 @@ paths:
           description: '`Route`の所有者を指定して検索'
         - schema:
             type: integer
-            minimum: 1
-            default: 1
+            minimum: 0
+            default: 0
           in: query
-          name: page
-          description: 取得するページ番号
+          name: page_offset
+          description: 取得するページ位置（0-indexed）
         - schema:
             type: integer
             default: 20
