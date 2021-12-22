@@ -93,12 +93,16 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/RouteInfo'
+                  result_num:
+                    type: integer
+                    description: このページを含む検索結果の総数
                 required:
                   - routes
+                  - result_num
       operationId: get-routes-search
       description: |-
         公開ルートの検索を行う。
-        現状は`route_id`の昇順で返ってくる（いずれ作成日時などのフィールドを追加して、それに応じて並べたい）
+        現状は`updated_at`の昇順で返ってくる（いずれ作成日時などのフィールドを追加して、それに応じて並べたい）
       parameters:
         - schema:
             type: string
@@ -107,6 +111,20 @@ paths:
           in: query
           name: owner_id
           description: '`Route`の所有者を指定して検索'
+        - schema:
+            type: integer
+            minimum: 1
+            default: 1
+          in: query
+          name: page
+          description: 取得するページ番号
+        - schema:
+            type: integer
+            default: 20
+            minimum: 1
+          in: query
+          name: page_size
+          description: ページあたりの検索結果件数
     parameters: []
   '/routes/{id}':
     get:
