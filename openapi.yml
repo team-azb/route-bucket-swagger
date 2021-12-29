@@ -614,9 +614,7 @@ paths:
                   maxLength: 50
                   description: Userの表示名
                 email:
-                  type: string
-                  format: email
-                  description: Userのemail
+                  $ref: '#/components/schemas/Email'
                 gender:
                   $ref: '#/components/schemas/Gender'
                 birthdate:
@@ -736,8 +734,7 @@ paths:
                   type: string
                   description: Userの表示名
                 email:
-                  type: string
-                  description: Userのemail
+                  $ref: '#/components/schemas/Email'
                 gender:
                   $ref: '#/components/schemas/Gender'
                 birthdate:
@@ -974,10 +971,13 @@ components:
           $ref: '#/components/schemas/Birthdate'
         icon_url:
           $ref: '#/components/schemas/IconUrl'
+        email:
+          $ref: '#/components/schemas/Email'
       required:
         - id
         - name
         - gender
+        - email
     UserId:
       type: string
       title: UserId
@@ -1010,6 +1010,10 @@ components:
       format: uri
       x-tags:
         - user
+    Email:
+      type: string
+      format: email
+      description: Userのemail
     Error:
       type: object
       description: Error
