@@ -1029,6 +1029,7 @@ components:
       enum:
         - INVALID_FORMAT
         - ALREADY_EXISTS
+        - RESERVED_WORD
   parameters:
     pos:
       name: pos
