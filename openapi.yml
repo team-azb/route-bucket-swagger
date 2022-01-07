@@ -905,10 +905,30 @@ components:
           description: ルートの名前
         owner_id:
           $ref: '#/components/schemas/UserId'
+        elevation_gain:
+          type: integer
+          description: 獲得標高
+          minimum: 0
+          format: int32
+        total_distance:
+          type: number
+          description: ルートの総距離
+          minimum: 0
+          format: double
+        updated_at:
+          type: string
+          title: Birthdate
+          format: date
+          description: 最終更新日時
+        bounding_box:
+          $ref: '#/components/schemas/BoundingBox'
       required:
         - id
         - name
         - owner_id
+        - elevation_gain
+        - total_distance
+        - updated_at
     Route:
       type: object
       description: |-
