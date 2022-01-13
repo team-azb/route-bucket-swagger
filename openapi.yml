@@ -920,8 +920,6 @@ components:
           title: Birthdate
           format: date
           description: 最終更新日時
-        bounding_box:
-          $ref: '#/components/schemas/BoundingBox'
       required:
         - id
         - name
