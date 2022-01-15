@@ -935,9 +935,14 @@ components:
           description: 各waypointsの間のSegmentたち
           items:
             $ref: '#/components/schemas/Segment'
-        elevation_gain:
+        ascent_elevation_gain:
           type: integer
-          description: 獲得標高
+          description: 上り獲得標高
+          minimum: 0
+          format: int32
+        descent_elevation_gain:
+          type: integer
+          description: 下り獲得標高
           minimum: 0
           format: int32
         total_distance:
@@ -953,7 +958,8 @@ components:
         - owner_id
         - waypoints
         - segments
-        - elevation_gain
+        - ascent_elevation_gain
+        - descent_elevation_gain
         - total_distance
     User:
       title: User
@@ -1074,9 +1080,14 @@ components:
                 description: 各waypointsの間のSegmentたち
                 items:
                   $ref: '#/components/schemas/Segment'
-              elevation_gain:
+              ascent_elevation_gain:
                 type: integer
-                description: 獲得標高
+                description: 上り獲得標高
+                minimum: 0
+                format: int32
+              descent_elevation_gain:
+                type: integer
+                description: 下り獲得標高
                 minimum: 0
                 format: int32
               total_distance:
@@ -1087,7 +1098,8 @@ components:
             required:
               - waypoints
               - segments
-              - elevation_gain
+              - ascent_elevation_gain
+              - descent_elevation_gain
               - total_distance
     AuthenticationErrorResponse:
       description: |-
