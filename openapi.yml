@@ -132,7 +132,8 @@ paths:
       tags:
         - route
       description: |
-        指定したRouteの情報を取得する
+        指定したRouteの情報を取得する。
+        このエンドポイントを呼ぶには、`VIEWER`以上の権限が必要。
       responses:
         '200':
           description: ok
@@ -288,6 +289,9 @@ paths:
                 $ref: '#/components/schemas/Error'
       security:
         - userBearerAuth: []
+      description: |-
+        指定した`Route`を削除する
+        このエンドポイントを呼ぶには、`EDITOR`以上の権限が必要。
     parameters:
       - in: path
         name: id
@@ -316,14 +320,15 @@ paths:
                 type: object
                 properties: {}
       operationId: get-routes-id-gpx
-      description: ''
+      description: このエンドポイントを呼ぶには、`VIEWER`以上の権限が必要。
       parameters: []
   '/routes/{id}/rename/':
     patch:
       operationId: routesRename
       summary: Routeの名前変更
       description: |
-        指定したRouteの名前を変更する
+        指定したRouteの名前を変更する。
+        このエンドポイントを呼ぶには、`EDITOR`以上の権限が必要。
       tags:
         - route
       requestBody:
@@ -368,7 +373,8 @@ paths:
       tags:
         - route
       description: |
-        指定したRouteのpos番目の位置に新たな点を追加する
+        指定したRouteのpos番目の位置に新たな点を追加する。
+        このエンドポイントを呼ぶには、`EDITOR`以上の権限が必要。
       responses:
         '200':
           $ref: '#/components/responses/RouteEditResponse'
@@ -404,7 +410,8 @@ paths:
       tags:
         - route
       description: |
-        指定したRouteのpos番目の点を削除する
+        指定したRouteのpos番目の点を削除する。
+        このエンドポイントを呼ぶには、`EDITOR`以上の権限が必要。
       responses:
         '200':
           $ref: '#/components/responses/RouteEditResponse'
@@ -445,7 +452,9 @@ paths:
     patch:
       operationId: routesMove
       summary: 点の座標の変更
-      description: route_idに対応するRouteのpos番目の点の座標を変更する
+      description: |-
+        route_idに対応するRouteのpos番目の点の座標を変更する。
+        このエンドポイントを呼ぶには、`EDITOR`以上の権限が必要。
       tags:
         - route
       responses:
@@ -483,7 +492,8 @@ paths:
       tags:
         - route
       description: |
-        指定したRouteの全ての点を削除する
+        指定したRouteの全ての点を削除する。
+        このエンドポイントを呼ぶには、`EDITOR`以上の権限が必要。
       responses:
         '200':
           $ref: '#/components/responses/RouteEditResponse'
@@ -509,7 +519,8 @@ paths:
       tags:
         - route
       description: |
-        指定したRouteの操作を一つ進める
+        指定したRouteの操作を一つ進める。
+        このエンドポイントを呼ぶには、`EDITOR`以上の権限が必要。
       responses:
         '200':
           $ref: '#/components/responses/RouteEditResponse'
@@ -542,7 +553,8 @@ paths:
       tags:
         - route
       description: |
-        指定したRouteの操作を一つ戻す
+        指定したRouteの操作を一つ戻す。
+        このエンドポイントを呼ぶには、`EDITOR`以上の権限が必要。
       responses:
         '200':
           $ref: '#/components/responses/RouteEditResponse'
