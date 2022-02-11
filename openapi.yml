@@ -568,6 +568,37 @@ paths:
         - userBearerAuth: []
     parameters:
       - $ref: '#/components/parameters/route_id'
+  '/routes/{id}/permissions/':
+    parameters:
+      - $ref: '#/components/parameters/route_id'
+    put:
+      summary: あるユーザへの権限の付与
+      operationId: put-routes-id-permissions
+      responses:
+        '200':
+          description: OK
+        '401':
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+        '403':
+          $ref: '#/components/responses/AuthorizationErrorResponse'
+      tags:
+        - route
+      security:
+        - userBearerAuth: []
+      description: |-
+        bodyで指定した`User`に指定した`PermissionType`の権限を付与する。
+        このエンドポイントを呼ぶには、`EDITOR`以上の権限が必要。
+    delete:
+      summary: 権限の削除
+      operationId: delete-routes-id-permissions
+      responses:
+        '200':
+          description: OK
+      description: |-
+        bodyで指定した`User`の権限を削除する。
+        このエンドポイントを呼ぶには、`EDITOR`以上の権限が必要。
+      security:
+        - userBearerAuth: []
   /users/:
     post:
       summary: Userの作成
@@ -955,6 +986,19 @@ components:
         - segments
         - elevation_gain
         - total_distance
+    PermissionType:
+      type: string
+      title: PermissionType
+      description: |-
+        リソースへの権限の種類
+        権限の強さは
+        VIEWER < EDITOR (< OWNER)
+        OWNERはこの値ではなく、`RouteInfo`の`owner_id`から取得する
+      enum:
+        - VIEWER
+        - EDITOR
+      x-tags:
+        - route
     User:
       title: User
       type: object
