@@ -600,6 +600,19 @@ paths:
       description: |-
         bodyで指定した`User`に指定した`PermissionType`の権限を付与する。
         このエンドポイントを呼ぶには、`EDITOR`以上の権限が必要。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  $ref: '#/components/schemas/UserId'
+                type:
+                  $ref: '#/components/schemas/PermissionType'
+              required:
+                - user_id
+                - type
     delete:
       summary: 権限の削除
       operationId: delete-routes-id-permissions
@@ -608,9 +621,20 @@ paths:
           description: OK
       description: |-
         bodyで指定した`User`の権限を削除する。
+        指定した`User`が権限を持っていなかったとしても、エラーとはならない。
         このエンドポイントを呼ぶには、`EDITOR`以上の権限が必要。
       security:
         - userBearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                　user_id:
+                  $ref: '#/components/schemas/UserId'
+              required:
+                - 　user_id
   /users/:
     post:
       summary: Userの作成
