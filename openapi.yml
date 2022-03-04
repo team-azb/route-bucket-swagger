@@ -631,10 +631,12 @@ paths:
             schema:
               type: object
               properties:
-                　user_id:
+                user_id:
                   $ref: '#/components/schemas/UserId'
               required:
-                - 　user_id
+                - user_id
+      tags:
+        - route
   /users/:
     post:
       summary: Userの作成
@@ -848,6 +850,8 @@ paths:
                     $ref: '#/components/schemas/ValidationErrorCode'
                   password:
                     $ref: '#/components/schemas/ValidationErrorCode'
+      tags:
+        - user
 components:
   schemas:
     Coordinate:
