@@ -917,9 +917,12 @@ components:
           format: double
         updated_at:
           type: string
-          title: Birthdate
           format: date
           description: 最終更新日時
+        created_at:
+          type: string
+          format: date
+          description: 作成日時
       required:
         - id
         - name
@@ -927,6 +930,7 @@ components:
         - elevation_gain
         - total_distance
         - updated_at
+        - created_at
     Route:
       type: object
       description: |-
