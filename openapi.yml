@@ -905,10 +905,38 @@ components:
           description: ルートの名前
         owner_id:
           $ref: '#/components/schemas/UserId'
+        ascent_elevation_gain:
+          type: integer
+          description: 上り獲得標高
+          minimum: 0
+          format: int32
+        descent_elevation_gain:
+          type: integer
+          description: 下り獲得標高
+          minimum: 0
+          format: int32
+        total_distance:
+          type: number
+          description: ルートの総距離
+          minimum: 0
+          format: double
+        created_at:
+          type: string
+          format: date
+          description: 作成日時
+        updated_at:
+          type: string
+          format: date
+          description: 最終更新日時
       required:
         - id
         - name
         - owner_id
+        - ascent_elevation_gain
+        - descent_elevation_gain
+        - total_distance
+        - created_at
+        - updated_at
     Route:
       type: object
       description: |-
