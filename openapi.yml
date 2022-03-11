@@ -920,14 +920,14 @@ components:
           description: ルートの総距離
           minimum: 0
           format: double
-        updated_at:
-          type: string
-          format: date
-          description: 最終更新日時
         created_at:
           type: string
           format: date
           description: 作成日時
+        updated_at:
+          type: string
+          format: date
+          description: 最終更新日時
       required:
         - id
         - name
@@ -935,8 +935,8 @@ components:
         - ascent_elevation_gain
         - descent_elevation_gain
         - total_distance
-        - updated_at
         - created_at
+        - updated_at
     Route:
       type: object
       description: |-
