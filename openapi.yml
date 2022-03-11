@@ -976,10 +976,38 @@ components:
           description: ルートの名前
         owner_id:
           $ref: '#/components/schemas/UserId'
+        ascent_elevation_gain:
+          type: integer
+          description: 上り獲得標高
+          minimum: 0
+          format: int32
+        descent_elevation_gain:
+          type: integer
+          description: 下り獲得標高
+          minimum: 0
+          format: int32
+        total_distance:
+          type: number
+          description: ルートの総距離
+          minimum: 0
+          format: double
+        created_at:
+          type: string
+          format: date
+          description: 作成日時
+        updated_at:
+          type: string
+          format: date
+          description: 最終更新日時
       required:
         - id
         - name
         - owner_id
+        - ascent_elevation_gain
+        - descent_elevation_gain
+        - total_distance
+        - created_at
+        - updated_at
     Route:
       type: object
       description: |-
@@ -1006,9 +1034,14 @@ components:
           description: 各waypointsの間のSegmentたち
           items:
             $ref: '#/components/schemas/Segment'
-        elevation_gain:
+        ascent_elevation_gain:
           type: integer
-          description: 獲得標高
+          description: 上り獲得標高
+          minimum: 0
+          format: int32
+        descent_elevation_gain:
+          type: integer
+          description: 下り獲得標高
           minimum: 0
           format: int32
         total_distance:
@@ -1024,7 +1057,8 @@ components:
         - owner_id
         - waypoints
         - segments
-        - elevation_gain
+        - ascent_elevation_gain
+        - descent_elevation_gain
         - total_distance
     PermissionType:
       type: string
@@ -1158,9 +1192,14 @@ components:
                 description: 各waypointsの間のSegmentたち
                 items:
                   $ref: '#/components/schemas/Segment'
-              elevation_gain:
+              ascent_elevation_gain:
                 type: integer
-                description: 獲得標高
+                description: 上り獲得標高
+                minimum: 0
+                format: int32
+              descent_elevation_gain:
+                type: integer
+                description: 下り獲得標高
                 minimum: 0
                 format: int32
               total_distance:
@@ -1171,7 +1210,8 @@ components:
             required:
               - waypoints
               - segments
-              - elevation_gain
+              - ascent_elevation_gain
+              - descent_elevation_gain
               - total_distance
     AuthenticationErrorResponse:
       description: |-
