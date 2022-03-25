@@ -599,7 +599,7 @@ paths:
         - userBearerAuth: []
       description: |-
         bodyで指定した`User`に指定した`PermissionType`の権限を付与する。
-        このエンドポイントを呼ぶには、`EDITOR`以上の権限が必要。
+        このエンドポイントを呼ぶには、`OWNER`権限が必要。
       requestBody:
         content:
           application/json:
@@ -622,7 +622,7 @@ paths:
       description: |-
         bodyで指定した`User`の権限を削除する。
         指定した`User`が権限を持っていなかったとしても、エラーとはならない。
-        このエンドポイントを呼ぶには、`EDITOR`以上の権限が必要。
+        このエンドポイントを呼ぶには、`OWNER`権限が必要。
       security:
         - userBearerAuth: []
       requestBody:
