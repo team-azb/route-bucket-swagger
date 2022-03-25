@@ -991,6 +991,11 @@ components:
           description: ルートの総距離
           minimum: 0
           format: double
+        is_public:
+          type: boolean
+          description: |-
+            公開ルートか否か
+            公開の場合、前ユーザがVIEWER権限を持つことと等価である
         created_at:
           type: string
           format: date
@@ -1006,6 +1011,7 @@ components:
         - ascent_elevation_gain
         - descent_elevation_gain
         - total_distance
+        - is_public
         - created_at
         - updated_at
     Route:
