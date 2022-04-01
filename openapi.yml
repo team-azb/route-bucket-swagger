@@ -137,6 +137,12 @@ paths:
           in: query
           name: page_size
           description: ページあたりの検索結果件数 （指定されなかった場合、全件取得する）
+        - schema:
+            type: boolean
+            default: 'false'
+          in: query
+          name: is_editable
+          description: falseの場合、閲覧可能な`Route`から検索する。trueの場合、リクエストしたユーザが編集可能な`Route`のみ抽出して返す。
       security:
         - {}
         - userBearerAuth: []
@@ -288,7 +294,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
       security:
-        - {} 
+        - {}
         - userBearerAuth: []
     delete:
       operationId: routesDelete
