@@ -36,7 +36,15 @@ paths:
                         owner_id: user0
                 required:
                   - routes
-      description: 全`Route`の`RouteInfo`を一覧で返す
+      description: |-
+        全公開`Route`の`RouteInfo`を一覧で返す
+        Bearerトークンを指定した場合は、公開ルートに加えてそのユーザがVIEWER権限を持つ`Route`が返される
+
+        `/routes/search`で代用可能なのでdeprecatred
+      security:
+        - {}
+        - userBearerAuth: []
+      deprecated: true
     post:
       operationId: routesPost
       summary: Routeの作成
@@ -107,6 +115,11 @@ paths:
       description: |-
         公開ルートの検索を行う。
         現状は`updated_at`の昇順で返ってくる（いずれ作成日時などのフィールドを追加して、それに応じて並べたい）
+
+        Bearerトークンを指定した場合は、公開ルートに加えてそのユーザがVIEWER権限を持つ`Route`が返される
+
+        OpenAPI Specのsecurityの部分は、BearerAuthを指定しても指定しなくても良いということを表している
+        参考：https://github.com/OAI/OpenAPI-Specification/issues/14#issuecomment-551495541
       parameters:
         - schema:
             type: string
@@ -128,6 +141,15 @@ paths:
           in: query
           name: page_size
           description: ページあたりの検索結果件数 （指定されなかった場合、全件取得する）
+        - schema:
+            type: boolean
+            default: 'false'
+          in: query
+          name: is_editable
+          description: falseの場合、閲覧可能な`Route`から検索する。trueの場合、リクエストしたユーザが編集可能な`Route`のみ抽出して返す。
+      security:
+        - {}
+        - userBearerAuth: []
     parameters: []
   '/routes/{id}':
     get:
@@ -137,7 +159,8 @@ paths:
         - route
       description: |
         指定したRouteの情報を取得する。
-        このエンドポイントを呼ぶには、`VIEWER`以上の権限が必要。
+
+        `Route`が公開されている場合は、認証なしで誰でも呼ぶことができるが、非公開の場合、このエンドポイントを呼ぶにはBearerトークンを指定した上で、`VIEWER`以上の権限が必要。
       responses:
         '200':
           description: ok
@@ -265,6 +288,8 @@ paths:
                   max_coord:
                     longitude: 139.76143
                     latitude: 35.69055
+        '403':
+          $ref: '#/components/responses/AuthorizationErrorResponse'
         '404':
           description: |
             対応するRouteが存在しない場合
@@ -272,6 +297,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+        - {}
+        - userBearerAuth: []
     delete:
       operationId: routesDelete
       summary: Routeの削除
